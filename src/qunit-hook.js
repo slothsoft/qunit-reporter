@@ -6,6 +6,9 @@
  * @url https://github.com/slothsoft/qunit-reporter
  */
 
+// TODO: maybe the separate assertions are tests and the tests actually suites (in suites)
+// FIXME: use the data that QUnit provides
+
 require('qunit');
 var TestCollector = require('./test-collector.js');
 
@@ -48,17 +51,17 @@ QUnit.testDone(function(data) {
 	// assertions.message: [if exception] Died on test #1
 	// source:     at Object.<anonymous> (stacktrace)
 	testCollector.endTest();
-	console.log("name: " + data.name);
-	console.log("module: " + data.module);
-	console.log("skipped: " + data.skipped);
-	console.log("todo: " + data.todo);
-	console.log("failed: " + data.failed);
-	console.log("passed: " + data.passed);
-	console.log("total: " + data.total);
-	console.log("assertions.result: " + data.assertions[0].result);
-	console.log("assertions.message: " + data.assertions[0].message);
-	console.log("assertions: " + Object.getOwnPropertyNames(data.assertions[0]));
-	console.log("source: " + data.source);
+//	console.log("name: " + data.name);
+//	console.log("module: " + data.module);
+//	console.log("skipped: " + data.skipped);
+//	console.log("todo: " + data.todo);
+//	console.log("failed: " + data.failed);
+//	console.log("passed: " + data.passed);
+//	console.log("total: " + data.total);
+//	console.log("assertions.result: " + data.assertions[0].result);
+//	console.log("assertions.message: " + data.assertions[0].message);
+//	console.log("assertions: " + Object.getOwnPropertyNames(data.assertions[0]));
+//	console.log("source: " + data.source);
 });
 
 QUnit.moduleDone(function(data) {

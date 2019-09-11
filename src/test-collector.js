@@ -8,6 +8,8 @@
 * @url https://github.com/slothsoft/qunit-reporter
 */
 
+// TODO: collect suites (and tests?) with the same name
+
 class TestCollector {
 
 	constructor() {
@@ -72,7 +74,6 @@ class TestCollector {
 	beginTest(test={}) {
 		var defaultTest = {
 			name : "test()",
-			total : 0,
 			failure : null,
 			error : null,
 			start : new Date(),

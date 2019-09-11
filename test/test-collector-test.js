@@ -3,8 +3,10 @@ var TestCollector = require('../src/test-collector.js');
 QUnit.module("test-collector", function() {
 	QUnit.test("constructor()", function(assert) {
 		var collector = new TestCollector();
-		
-		assert.deepEqual(collector.currentRun, null);
+
+		assert.equal(collector.currentRun, null);
+		assert.equal(collector.currentSuite, null);
+		assert.equal(collector.currentTest, null);
 	});
 
 	QUnit.test("beginRun()", function(assert) {
@@ -216,7 +218,6 @@ QUnit.module("test-collector", function() {
 		assert.deepEqual(suite.tests, [test]);
 		
 		assert.equal(test.name, "test()");
-		assert.equal(test.total, 0);
 		assert.equal(test.failure, null);
 		assert.equal(test.error, null);
 		assert.equal(test.start != null, true);
@@ -237,7 +238,6 @@ QUnit.module("test-collector", function() {
 		assert.deepEqual(suite.tests, [test]);
 		
 		assert.equal(test.name, "My Test");
-		assert.equal(test.total, 0);
 		assert.equal(test.failure, null);
 		assert.equal(test.error, 123);
 		assert.equal(test.start != null, true);
@@ -255,7 +255,6 @@ QUnit.module("test-collector", function() {
 		assert.deepEqual(suite.tests, [test]);
 
 		assert.equal(test.name, "test()");
-		assert.equal(test.total, 0);
 		assert.equal(test.failure, null);
 		assert.equal(test.error, null);
 		assert.equal(test.start != null, true);
@@ -275,7 +274,6 @@ QUnit.module("test-collector", function() {
 		assert.deepEqual(run.suites, [suite]);
 
 		assert.equal(test.name, "test()");
-		assert.equal(test.total, 0);
 		assert.equal(test.failure, null);
 		assert.equal(test.error, null);
 		assert.equal(test.start != null, true);
