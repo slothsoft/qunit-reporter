@@ -7,8 +7,8 @@
 		"node": "8.x || 9.x || 10.x || 11.x || 12.x"
 	},
 	"scripts": {
-		"test": "qunit test/*test.js",
-		"run-demo": "qunit test/demo-test-suite.js"
+		"test": "qunit test/**/*test.js",
+    	"generate-readme": "node script/generate-readme.js"
 	},
 	"repository": {
 		"type": "git",

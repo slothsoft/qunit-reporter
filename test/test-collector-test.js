@@ -13,10 +13,10 @@ QUnit.module("test-collector", function() {
 		var collector = new TestCollector();
 		
 		var run = collector.beginRun();
-		
+
+		assert.deepEqual(run.name, "Unknown Run");
 		assert.deepEqual(run.suites, []);
 		assert.equal(run.total, 0);
-		assert.equal(run.passing, 0);
 		assert.equal(run.failures, 0);
 		assert.equal(run.errors, 0);
 		assert.equal(run.start != null, true);
@@ -33,7 +33,6 @@ QUnit.module("test-collector", function() {
 		});
 		
 		assert.equal(run.total, 1);
-		assert.equal(run.passing, 0);
 		assert.equal(run.failures, 2);
 		assert.equal(run.errors, 0);
 		assert.equal(run.time, 3);
@@ -44,28 +43,11 @@ QUnit.module("test-collector", function() {
 		var run = collector.beginRun();
 		collector.endRun({
 			total : 12,
-			passing : 6,
 			failures : 4,
 			errors : 2
 		});
 		
 		assert.equal(run.total, 12);
-		assert.equal(run.passing, 6);
-		assert.equal(run.failures, 4);
-		assert.equal(run.errors, 2);
-	});
-
-	QUnit.test("endRun() without total", function(assert) {
-		var collector = new TestCollector();
-		var run = collector.beginRun();
-		collector.endRun({
-			passing : 6,
-			failures : 4,
-			errors : 2
-		});
-		
-		assert.equal(run.total, 12);
-		assert.equal(run.passing, 6);
 		assert.equal(run.failures, 4);
 		assert.equal(run.errors, 2);
 	});
@@ -76,31 +58,12 @@ QUnit.module("test-collector", function() {
 		collector.beginSuite();
 		collector.endSuite({
 			total : 12,
-			passing : 6,
 			failures : 4,
 			errors : 2
 		}); 
 		collector.endRun();
 		
 		assert.equal(run.total, 12);
-		assert.equal(run.passing, 6);
-		assert.equal(run.failures, 4);
-		assert.equal(run.errors, 2);
-	});
-
-	QUnit.test("endRun() without data but with suite but without total", function(assert) {
-		var collector = new TestCollector();
-		var run = collector.beginRun();
-		collector.beginSuite();
-		collector.endSuite({
-			passing : 6,
-			failures : 4,
-			errors : 2
-		}); 
-		collector.endRun();
-		
-		assert.equal(run.total, 12);
-		assert.equal(run.passing, 6);
 		assert.equal(run.failures, 4);
 		assert.equal(run.errors, 2);
 	});
@@ -114,7 +77,6 @@ QUnit.module("test-collector", function() {
 		collector.endRun();
 		
 		assert.equal(run.total, 6);
-		assert.equal(run.passing, 1);
 		assert.equal(run.failures, 2);
 		assert.equal(run.errors, 3);
 	});
@@ -130,7 +92,6 @@ QUnit.module("test-collector", function() {
 		assert.equal(suite.name, "Unknown Suite");
 		assert.deepEqual(suite.tests, []);
 		assert.equal(suite.total, 0);
-		assert.equal(suite.passing, 0);
 		assert.equal(suite.failures, 0);
 		assert.equal(suite.errors, 0);
 		assert.equal(suite.start != null, true);
@@ -143,7 +104,6 @@ QUnit.module("test-collector", function() {
 		var run = collector.beginRun();
 		var suite = collector.beginSuite({
 			name : "My Suite",
-			passing : 123
 		});
 
 		assert.deepEqual(run.suites, [suite]);
@@ -151,7 +111,6 @@ QUnit.module("test-collector", function() {
 		assert.equal(suite.name, "My Suite");
 		assert.deepEqual(suite.tests, []);
 		assert.equal(suite.total, 0);
-		assert.equal(suite.passing, 123);
 		assert.equal(suite.failures, 0);
 		assert.equal(suite.errors, 0);
 		assert.equal(suite.start != null, true);
@@ -170,7 +129,6 @@ QUnit.module("test-collector", function() {
 		assert.equal(suite.name, "Unknown Suite");
 		assert.deepEqual(suite.tests, []);
 		assert.equal(suite.total, 0);
-		assert.equal(suite.passing, 0);
 		assert.equal(suite.failures, 0);
 		assert.equal(suite.errors, 0);
 		assert.equal(suite.start != null, true);
@@ -184,13 +142,11 @@ QUnit.module("test-collector", function() {
 		collector.endTest();
 		collector.endSuite({
 			total : 12,
-			passing : 6,
 			failures : 4,
 			errors : 2
 		}); 
 		
 		assert.equal(suite.total, 12);
-		assert.equal(suite.passing, 6);
 		assert.equal(suite.failures, 4);
 		assert.equal(suite.errors, 2);
 	});
@@ -202,7 +158,6 @@ QUnit.module("test-collector", function() {
 		collector.endSuite(); 
 		
 		assert.equal(suite.total, 6);
-		assert.equal(suite.passing, 1);
 		assert.equal(suite.failures, 2);
 		assert.equal(suite.errors, 3);
 	});

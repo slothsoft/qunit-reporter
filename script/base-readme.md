@@ -9,11 +9,5 @@
 A module to generate reports from QUnit.
 
 ```js
-// create a test collector somehow
-var testCollector = createTestCollector();
-
-var qunitReporter = require("qunit-reporter");
-qunitReporter.fromTestCollector(testCollector).toJUnit({
-	file : "example/export-junit-report.xml"
-});
+<export-junit-report>
 ```
