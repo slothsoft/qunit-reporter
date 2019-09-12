@@ -1,11 +1,14 @@
 
 /**
-* This class export data collected by a TestCollector into JUnit XML format.
-* 
-* @since 1.0.0
-* @author Stef Schulz <s.schulz@slothsoft.de>
-* @url https://github.com/slothsoft/qunit-reporter
-*/
+ * This class exports data collected by a TestCollector into JUnit XML format.
+ * 
+ * @since 1.0.0
+ * @author Stef Schulz <s.schulz@slothsoft.de>
+ * @url https://github.com/slothsoft/qunit-reporter
+ */
+
+// TODO: some of the exported fields might be null / undefined
+// TODO: "skipped" is obviously supported
 
 var XMLWriter = require('xml-writer');
  
@@ -16,14 +19,64 @@ class JUnitExport {
 	}
 
 	/**
-	 * This method makes Runs that look like this:
+	 * This method creates an XML that looks like this:
+	 * <testsuite tests="8" failures="2" name="de.slothsoft.mypackage.MyTest" time="0.043" errors="1" skipped="0">
+	 * [list] <testsuite></testsuite>
+	 * </testsuite>
+	 * 
+	 * @see TestCollector#beginRun for supported properties
+	 * @see JUnitExport#exportSuite for the inner test suite XML
+	 */
+	
+	exportRun(run) {    
+		this.xmlWriter.startDocument();
+		this.startTestSuiteElement(run);
+		if (run.suites != null) {
+			run.suites.forEach(suite => this.exportSuite(suite));
+		}
+		this.xmlWriter.endElement();
+		this.xmlWriter.endDocument();
+	   
+		return this.xmlWriter.toString();
+	}
+
+	/**
+	 * This method creates an XML that looks like this:
+	 * <testsuite tests="8" failures="2" name="de.slothsoft.mypackage.MyTest" time="0.043" errors="1" skipped="0">
+	 * [list] <testcase></testcase>
+	 * </testsuite>
+	 * 
+	 * @see TestCollector#beginSuite for supported properties
+	 * @see JUnitExport#exportTest for the test case XML
+	 */
+	
+	exportSuite(suite) {    
+		this.startTestSuiteElement(suite);
+		if (suite.tests != null) {
+			suite.tests.forEach(test => this.exportTest(test));
+		}
+		this.xmlWriter.endElement();
+	}
+
+	startTestSuiteElement(suite) { 
+		this.xmlWriter.startElement('testsuite');
+		this.xmlWriter.writeAttribute('name', suite.name);
+		this.xmlWriter.writeAttribute('time', suite.time);
+		this.xmlWriter.writeAttribute('tests', suite.total);
+		this.xmlWriter.writeAttribute('failures', suite.failures);
+		this.xmlWriter.writeAttribute('errors', suite.errors);
+	}
+
+	/**
+	 * This method creates an XML that looks like this:
 	 * <testcase classname="de.slothsoft.mypackage.MyTest" name="testFailure" time="0.042">
 	 * [optional] <failure message="expected:&lt;1&gt; but was:&lt;2&gt;" type="java.lang.AssertionError">java.lang.AssertionError</failure>
 	 * [optional] <error message="This is an error." type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: This is an error.</error>
+	 * </testcase>
 	 * 
-	 * @see TestCollector#beginRun for supported properties
+	 * @see TestCollector#beginTest for supported properties
 	 */
-	
+		
 	exportTest(test) {    
 		this.xmlWriter.startElement('testcase');
 		this.xmlWriter.writeAttribute('name', test.name);

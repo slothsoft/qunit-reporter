@@ -72,6 +72,124 @@ QUnit.module("junit-export", function() {
 	    assertXmlEqual(assert, junitExport.xmlWriter.toString(),
 	    		xmlHeader + "<testcase name='MyExportedFailure' time='9000'><failure message='Failure D:'>Failure D:</failure></testcase>");
 	});
+	
+	QUnit.test("exportSuite()", function(assert) {
+		var junitExport = new JUnitExport();
+
+		junitExport.xmlWriter.startDocument();
+		junitExport.exportSuite( {
+			name : "MyExportedSuite",
+			total : 1,
+			failures : 3,
+			errors : 4,
+			time : 5678
+		});
+		junitExport.xmlWriter.endDocument();
+	 
+	    assertXmlEqual(assert, junitExport.xmlWriter.toString(),
+	    		xmlHeader + "<testsuite tests='1' failures='3' name='MyExportedSuite' time='5678' errors='4'></testsuite>");
+	});
+
+	
+	QUnit.test("exportSuite() with tests", function(assert) {
+		var junitExport = new JUnitExport();
+
+		junitExport.xmlWriter.startDocument();
+		junitExport.exportSuite( {
+			name : "MyExportedSuite",
+			tests : [
+				{ name : "MyTest1", time : 1234},
+				{ name : "MyTest2", time : 5678},
+			],
+			total : 1,
+			failures : 3,
+			errors : 4,
+			time : 9
+		});
+		junitExport.xmlWriter.endDocument();
+
+	    assertXmlEqual(assert, junitExport.xmlWriter.toString(),
+	    		xmlHeader + "<testsuite tests='1' failures='3' name='MyExportedSuite' time='9' errors='4'>" +
+	    				"<testcase name='MyTest1' time='1234'></testcase>" +
+	    				"<testcase name='MyTest2' time='5678'></testcase>" +
+	    				"</testsuite>");
+	});
+
+	QUnit.test("exportRun()", function(assert) {
+		var junitExport = new JUnitExport();
+
+		var result = junitExport.exportRun({
+			name : "MyExportedRun",
+			total : 1,
+			failures : 2,
+			errors : 3,
+			time : 456789
+		});
+
+	    assertXmlEqual(assert, result,
+	    		xmlHeader + "<testsuite tests='1' failures='2' name='MyExportedRun' time='456789' errors='3'></testsuite>");
+	});
+
+
+	QUnit.test("exportRun() with suite", function(assert) {
+		var junitExport = new JUnitExport();
+
+		var result = junitExport.exportRun({
+			name : "MyExportedRun",
+			suites : [
+				{
+					name : "MyExportedSuite",
+					total : 4,
+					failures : 5,
+					errors : 6,
+					time : 7
+				}
+			],
+			total : 1,
+			failures : 2,
+			errors : 3,
+			time : 456789
+		});
+
+	    assertXmlEqual(assert, result,
+	    		xmlHeader + "<testsuite tests='1' failures='2' name='MyExportedRun' time='456789' errors='3'>" +
+	    				"<testsuite tests='4' failures='5' name='MyExportedSuite' time='7' errors='6'></testsuite>" +
+	    				"</testsuite>");
+	});
+
+	QUnit.test("exportRun() with suite and test", function(assert) {
+		var junitExport = new JUnitExport();
+
+		var result = junitExport.exportRun({
+			name : "MyExportedRun",
+			suites : [
+				{
+					name : "MyExportedSuite",
+					tests : [
+						{ name : "MyTest1", time : 1234},
+						{ name : "MyTest2", time : 5678},
+					],
+					total : 4,
+					failures : 5,
+					errors : 6,
+					time : 7
+				}
+			],
+			total : 1,
+			failures : 2,
+			errors : 3,
+			time : 456789
+		});
+
+	    assertXmlEqual(assert, result,
+	    		xmlHeader + "<testsuite tests='1' failures='2' name='MyExportedRun' time='456789' errors='3'>" +
+	    				"<testsuite tests='4' failures='5' name='MyExportedSuite' time='7' errors='6'>" +
+	    				"<testcase name='MyTest1' time='1234'></testcase>" +
+	    				"<testcase name='MyTest2' time='5678'></testcase>" +
+	    				"</testsuite>" +
+	    				"</testsuite>");
+	});
+
 });
 
 function assertXmlEqual(assert, actual, expected) {

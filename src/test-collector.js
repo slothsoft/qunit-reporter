@@ -20,9 +20,9 @@ class TestCollector {
 
 	beginRun(run={}) {
 		var defaultRun = {
+			name : "Unknown Run",
 			suites : [],
 			total : 0,
-			passing : 0,
 			failures : 0,
 			errors : 0,
 			start : new Date(),
@@ -35,13 +35,8 @@ class TestCollector {
 	endRun(run={}) {
 		this.currentRun.time = run.time || ((new Date()).getTime() - this.currentRun.start.getTime());
 		this.currentRun.total = run.total || this.currentRun.suites.reduce((a, {total}) => a + total, 0);
-		this.currentRun.passing = run.passing || this.currentRun.suites.reduce((a, {passing}) => a + passing, 0);
 		this.currentRun.failures = run.failures || this.currentRun.suites.reduce((a, {failures}) => a + failures, 0);
 		this.currentRun.errors = run.errors || this.currentRun.suites.reduce((a, {errors}) => a + errors, 0);
-		
-		if (this.currentRun.total == 0) {
-			this.currentRun.total = this.currentRun.passing + this.currentRun.failures + this.currentRun.errors;
-		}
 	}
 	
 	beginSuite(suite={}) {
@@ -49,7 +44,6 @@ class TestCollector {
 			name : "Unknown Suite",
 			tests : [],
 			total : 0,
-			passing : 0,
 			failures : 0,
 			errors : 0,
 			start : new Date(),
@@ -68,7 +62,6 @@ class TestCollector {
 		this.currentSuite.total = suite.total || this.currentSuite.tests.length;
 		this.currentSuite.failures = suite.failures || this.currentSuite.tests.reduce((a, {failure}) => a + (failure != null), 0);
 		this.currentSuite.errors = suite.errors || this.currentSuite.tests.reduce((a, {error}) => a + (error != null), 0);
-		this.currentSuite.passing = suite.passing || this.currentSuite.tests.length - this.currentSuite.failures - this.currentSuite.errors;
 	}
 
 	beginTest(test={}) {
