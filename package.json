@@ -10,7 +10,7 @@
 		"execute-examples": "node example/run-all.js && qunit example/source-qunit.js",
     	"generate-readme": "node script/generate-readme.js",
 		"test-only": "qunit test/**/*test.js",
-		"test": "npm run test && npm run execute-examples && npm run generate-readme"
+		"test": "npm run test-only && npm run execute-examples && npm run generate-readme"
 	},
 	"repository": {
 		"type": "git",

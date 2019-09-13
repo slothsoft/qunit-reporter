@@ -8,24 +8,17 @@
 
 A module to generate reports from QUnit. Right now this module supports getting test data from multiple sources. Similarly it exports into different formats.
 
-**Sources:**
-- general run object (see _[test-collector.js](src/test-collector.js)_)
-- QUnit
-- implementation of [Hook](src/hook/hook.js)
-
-**Exports:**
-- JUnit XML format
-- implementation of [Export](src/export/export.js)
-
-
-
 **Content of this file:**
 
 - [Getting Started](#getting-started)
     - [Installing](#installing)
     - [Using the Framework](#using-the-framework)
-    - [Examples for Sources](#examples-for-sources)
-    - [Examples for Exports](#examples-for-exports)
+- [Examples for Sources](#examples-for-sources)
+    - [QUnit](#qunit)
+- [Examples for Exports](#examples-for-exports)
+    - [HTML](#html)
+    - [JUnit](#junit)
+    - [Log](#log)
 - [Versions](#versions)
 - [License](#license)
 
@@ -73,9 +66,9 @@ require("@slothsoft/qunit-reporter")
 
 
 
-### Examples for Sources
+## Examples for Sources
 
-#### QUnit
+### QUnit
 
 - **Script File:** [JavaScript](example/source-qunit.js)
 - **Output File:** [TXT](example/output/source-qunit.txt)
@@ -86,7 +79,7 @@ require("@slothsoft/qunit-reporter")
 
 
 
-### Examples for Exports
+## Examples for Exports
 
 All exports acknowledge the following parameters in their configuration:
 
@@ -94,7 +87,7 @@ All exports acknowledge the following parameters in their configuration:
 - **`callback`** - callback function with report content
 
 
-#### HTML
+### HTML
 
 Creates an HTML that can be displayed in any browser.
 
@@ -106,7 +99,7 @@ Creates an HTML that can be displayed in any browser.
 ```
 
 
-#### JUnit
+### JUnit
 
 Creates standard JUnit XML that should be readable by every program that can handle JUnit as well.
 
@@ -118,7 +111,7 @@ Creates standard JUnit XML that should be readable by every program that can han
 ```
 
 
-#### Log
+### Log
 
 Creates a log similar to what NodeJS does when executing the tests.
 
