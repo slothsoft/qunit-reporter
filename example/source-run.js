@@ -16,4 +16,4 @@ var run = {
 	tile : 1368
 };
 
-require("../src/index.js").fromRun(run).toJUnit({ file : "example/output/source-run.xml" });
+require("../src/index.js").fromRun(run).toLog({ file : "example/output/source-run.txt" });

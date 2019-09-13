@@ -16,10 +16,12 @@ A module to generate reports from QUnit. Right now this module supports getting 
     - [Using the Framework](#using-the-framework)
 - [Examples for Sources](#examples-for-sources)
     - [QUnit](#qunit)
+    - [Custom Source](#custom-source)
 - [Examples for Exports](#examples-for-exports)
     - [HTML](#html)
     - [JUnit](#junit)
     - [Log](#log)
+    - [Custom Export](#custom-export)
 - [Versions](#versions)
 - [License](#license)
 
@@ -82,7 +84,7 @@ require("@slothsoft/qunit-reporter")
 ### Custom Source
 
 - **Script File:** [JavaScript](example/source-run.js)
-- **Output File:** [TXT](example/output/source-run.xml)
+- **Output File:** [TXT](example/output/source-run.txt)
 
 ```js
 <source-run>
