@@ -4,34 +4,36 @@ function createTestCollector() {
 	var collector = new TestCollector();
 	
 	collector.beginSuite({
-		"name" : "Module A"
+		name : "Module A"
 	});
-	collector.beginTest({ "name" : "test10" });
-	collector.endTest();
-	collector.beginTest({ "name" : "test11" });
-	collector.endTest();
+	collector.beginTest({ name : "test10" });
+	collector.endTest({ time  : 1 });
+	collector.beginTest({ name : "test11" });
+	collector.endTest({ time  : 2 });
 	collector.endSuite();
 
 	collector.beginSuite({
-		"name" : "Module B"
+		name : "Module B"
 	});
-	collector.beginTest({ "name" : "test20" });
-	collector.endTest();
+	collector.beginTest({ name : "test20" });
+	collector.endTest({ time  : 3 });
 	collector.endSuite();
 
 	collector.beginSuite({
-		"name" : "Module E"
+		name : "Module E"
 	});
-	collector.beginTest({ "name" : "test50" });
-	collector.endTest({ "error" : "An exception was thrown!" });
+	collector.beginTest({ name : "test50" });
+	collector.endTest({ error : "An exception was thrown!", time  : 4 });
 	collector.endSuite();
 
 	collector.beginSuite({
-		"name" : "Module F"
+		name : "Module F"
 	});
-	collector.beginTest({ "name" : "test60" });
-	collector.endTest({ "failure" : "expected: 5, actual: 'six'" });
+	collector.beginTest({ name : "test60" });
+	collector.endTest({ failure : "expected: 5, actual: 'six'", time  : 5 });
 	collector.endSuite();
+
+	collector.endRun();
 	
 	return collector;
 }

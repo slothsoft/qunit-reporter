@@ -33,7 +33,7 @@ class TestCollector {
 	}
 
 	endRun(run={}) {
-		this.currentRun.time = run.time || ((new Date()).getTime() - this.currentRun.start.getTime());
+		this.currentRun.time = run.time || this.currentRun.suites.reduce((a, {time}) => a + time, 0);
 		this.currentRun.total = run.total || this.currentRun.suites.reduce((a, {total}) => a + total, 0);
 		this.currentRun.failures = run.failures || this.currentRun.suites.reduce((a, {failures}) => a + failures, 0);
 		this.currentRun.errors = run.errors || this.currentRun.suites.reduce((a, {errors}) => a + errors, 0);
@@ -58,7 +58,7 @@ class TestCollector {
 	}
 
 	endSuite(suite={}) {
-		this.currentSuite.time = suite.time || ((new Date()).getTime() - this.currentSuite.start.getTime());
+		this.currentSuite.time = suite.time || this.currentSuite.tests.reduce((a, {time}) => a + time, 0);
 		this.currentSuite.total = suite.total || this.currentSuite.tests.length;
 		this.currentSuite.failures = suite.failures || this.currentSuite.tests.reduce((a, {failure}) => a + (failure != null), 0);
 		this.currentSuite.errors = suite.errors || this.currentSuite.tests.reduce((a, {error}) => a + (error != null), 0);

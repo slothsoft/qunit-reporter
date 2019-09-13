@@ -209,5 +209,5 @@ function assertXmlEqual(assert, actual, expected) {
 		collapseSpaces : true
 	};
 	var result = xmlCompare(parser.parseFromString(actual), parser.parseFromString(expected), options);
-	assert.deepEqual(result._diff, [], "XML not equal: " + result._diff.map((a) => `${a.message}`).join(', '));
+	assert.deepEqual(result._diff, [], "XML not equal: " + result._diff.map(a => a.message).join(', '));
 }

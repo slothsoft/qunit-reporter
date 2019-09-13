@@ -81,6 +81,23 @@ QUnit.module("test-collector", function() {
 		assert.equal(run.errors, 3);
 	});
 
+	QUnit.test("endSuite() without time", function(assert) {
+		var collector = new TestCollector();
+		var run = collector.beginRun();
+		collector.beginSuite();
+		collector.beginTest();
+		collector.endTest({ time : 1 });
+		collector.beginTest();
+		collector.endTest({ time : 2 });
+		collector.beginTest();
+		collector.endTest({ time : 3 });
+		collector.endSuite(); 
+		collector.endSuite(); 
+		collector.endRun();
+		
+		assert.equal(run.time, 6);
+	});
+	
 	QUnit.test("beginSuite()", function(assert) {
 		var collector = new TestCollector();
 		
@@ -160,6 +177,20 @@ QUnit.module("test-collector", function() {
 		assert.equal(suite.total, 6);
 		assert.equal(suite.failures, 2);
 		assert.equal(suite.errors, 3);
+	});
+
+	QUnit.test("endSuite() without time", function(assert) {
+		var collector = new TestCollector();
+		var suite = collector.beginSuite();
+		collector.beginTest();
+		collector.endTest({ time : 1 });
+		collector.beginTest();
+		collector.endTest({ time : 2 });
+		collector.beginTest();
+		collector.endTest({ time : 3 });
+		collector.endSuite(); 
+		
+		assert.equal(suite.time, 6);
 	});
 
 	QUnit.test("beginTest()", function(assert) {
@@ -272,13 +303,13 @@ function fillCollectorWithTests(collector) {
 	collector.beginTest();
 	collector.endTest();
 	collector.beginTest();
-	collector.endTest({"failure":"F"});
+	collector.endTest({failure:"F"});
 	collector.beginTest();
-	collector.endTest({"failure":"F"});
+	collector.endTest({failure:"F"});
 	collector.beginTest();
-	collector.endTest({"error":"E"});
+	collector.endTest({error:"E"});
 	collector.beginTest();
-	collector.endTest({"error":"E"});
+	collector.endTest({error:"E"});
 	collector.beginTest();
-	collector.endTest({"error":"E"});
+	collector.endTest({error:"E"});
 }

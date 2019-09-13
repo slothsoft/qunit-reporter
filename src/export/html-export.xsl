@@ -6,7 +6,7 @@
 			<head>
 				<title>Test Report</title>
 				<link rel="stylesheet" type="text/css"
-					href="style.css" />
+					href="https://slothsoft.github.io/qunit-reporter/style.css" />
 				<meta charset="utf-8" />
 			</head>
 			<body>
@@ -61,7 +61,7 @@
 									<xsl:value-of select="@name" />
 									
 									<span class="time">
-										(<xsl:value-of select="@time" />s)
+										(<xsl:value-of select="@time" />ms)
 									</span>
 									
 									<xsl:choose>
@@ -73,8 +73,22 @@
 										</xsl:when>
 										<xsl:when test="failure/@message">
 											<p class="expected-actual">
-												<b><xsl:value-of select="failure/@type" />: </b>
+												<xsl:choose>
+													<xsl:when test="failure/@type">
+														<b><xsl:value-of select="failure/@type" />: </b>
+													</xsl:when>
+												</xsl:choose>
 												<xsl:value-of select="failure/@message" />
+											</p>
+										</xsl:when>
+										<xsl:when test="error/@message">
+											<p class="expected-actual">
+												<xsl:choose>
+													<xsl:when test="error/@type">
+														<b><xsl:value-of select="error/@type" />: </b>
+													</xsl:when>
+												</xsl:choose>
+												<xsl:value-of select="error/@message" />
 											</p>
 										</xsl:when>
 									</xsl:choose>

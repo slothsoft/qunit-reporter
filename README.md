@@ -102,6 +102,7 @@ Creates an HTML that can be displayed in any browser.
 
 - **Script File:** [JavaScript](example/export-html.js)
 - **Output File:** [HTML](example/output/export-html.html)
+- **Live Example:** [qunit-reporter](https://slothsoft.github.io/qunit-reporter/)
 
 ```js
 var run = createRun();

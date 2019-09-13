@@ -7,6 +7,8 @@
  * @url https://github.com/slothsoft/qunit-reporter
  */
 
+// TODO: support skip and todo
+
 var Export = require('./export.js');
  
 class LogExport extends Export {

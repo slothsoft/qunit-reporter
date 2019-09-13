@@ -6,7 +6,7 @@ not ok 4 Module E > test50
 not ok 5 Module F > test60
   message: "expected: 5, actual: 'six'"
 1..5
-# pass 0
+# pass 3
 # skip 0
 # todo 0
-# fail 0
+# fail 2

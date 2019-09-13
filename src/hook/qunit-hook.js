@@ -9,7 +9,6 @@
 
 // TODO: maybe the separate assertions are tests and the tests actually suites
 // (in suites)
-// FIXME: use the data that QUnit provides
 // TODO: this should be a class I guess
 
 const QUnit = require("qunit");
@@ -44,36 +43,31 @@ QUnit.testDone(function(data) {
 	if (log) {
 		console.log("testDone()");
 	}
-	// name: test60
-	// module: Module F
-	// skipped: false
-	// todo: false
-	// failed: 1
-	// passed: 0
-	// total: 1
-	// assertions.result: false
-	// assertions.message: [if exception] Died on test #1
-	// source: at Object.<anonymous> (stacktrace)
-	testCollector.endTest();
-	// console.log("name: " + data.name);
-	// console.log("module: " + data.module);
-	// console.log("skipped: " + data.skipped);
-	// console.log("todo: " + data.todo);
-	// console.log("failed: " + data.failed);
-	// console.log("passed: " + data.passed);
-	// console.log("total: " + data.total);
-	// console.log("assertions.result: " + data.assertions[0].result);
-	// console.log("assertions.message: " + data.assertions[0].message);
-	// console.log("assertions: " +
-	// Object.getOwnPropertyNames(data.assertions[0]));
-	// console.log("source: " + data.source);
+	var failureMessage = data.assertions.filter(a => !a.result).map(a => a.message).join(', ');
+	var exceptionMessage = null;
+	
+	if (data.failed && !failureMessage) {
+		// TODO how are exceptions defined?	
+		exceptionMessage = "Exception.";
+		failureMessage = null;
+	}
+	
+	testCollector.endTest({
+		failure : failureMessage,
+		error : exceptionMessage,
+		time : data.runtime,
+	});
 });
 
 QUnit.moduleDone(function(data) {
 	if (log) {
 		console.log("moduleDone()");
 	}
-	testCollector.endSuite();
+	// we can't use data.failed and data.passed and data.total 
+	// because we define exceptions differently
+	testCollector.endSuite({
+		time : data.runtime,
+	});
 });
 
 var hook = new Hook();
@@ -82,7 +76,9 @@ QUnit.done(function(data) {
 	if (log) {
 		console.log("done()");
 	}
-	testCollector.endRun();
+	testCollector.endRun({
+		time : data.runtime,
+	});
 	hook.performFinish(testCollector.currentRun);
 });
 
