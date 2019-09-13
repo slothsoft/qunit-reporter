@@ -85,7 +85,7 @@ QUnit.module("source-qunit", function() {
 	});
 });
 
-require("qunit-reporter").fromQUnit().toLog({ file : "example/output/source-qunit.txt" });
+require("@slothsoft/qunit-reporter").fromQUnit().toLog({ file : "example/output/source-qunit.txt" });
 
 ```
 
@@ -114,7 +114,7 @@ var run = {
 	tile : 1368
 };
 
-require("qunit-reporter").fromRun(run).toLog({ file : "example/output/source-run.txt" });
+require("@slothsoft/qunit-reporter").fromRun(run).toLog({ file : "example/output/source-run.txt" });
 
 ```
 
@@ -139,7 +139,7 @@ Creates an HTML that can be displayed in any browser.
 ```js
 var run = createRun();
 
-require("qunit-reporter").fromRun(run).toHtml({
+require("@slothsoft/qunit-reporter").fromRun(run).toHtml({
 	file : "example/output/export-html.html", // exports directly to file
 	callback : reportContent => {}, // callback function with report content
 });
@@ -156,7 +156,7 @@ Creates standard JUnit XML that should be readable by every program that can han
 ```js
 var run = createRun();
 
-require("qunit-reporter").fromRun(run).toJUnit({
+require("@slothsoft/qunit-reporter").fromRun(run).toJUnit({
 	file : "example/output/export-junit.xml", // exports directly to file
 	callback : reportContent => {}, // callback function with report content
 });
@@ -173,7 +173,7 @@ Creates a log similar to what NodeJS does when executing the tests.
 ```js
 var run = createRun();
 
-require("qunit-reporter").fromRun(run).toLog({
+require("@slothsoft/qunit-reporter").fromRun(run).toLog({
 	file : "example/output/export-log.txt", // exports directly to file
 	callback : reportContent => {}, // callback function with report content
 });
@@ -190,7 +190,7 @@ Uses a function to export the run.
 ```js
 var run = createRun();
 
-require("qunit-reporter").fromRun(run).toCustomExport(function(run) {
+require("@slothsoft/qunit-reporter").fromRun(run).toCustomExport(function(run) {
 	// this is a minimalistic report
 	return (run.total - run.failures - run.errors) + " / " + run.total + " passed.";
 }, {

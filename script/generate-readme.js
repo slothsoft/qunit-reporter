@@ -18,7 +18,7 @@ function createReplacements(fileNames) {
 	fileNames.forEach(function(fileName) {
 		var fileContent = fs.readFileSync('example/' + fileName + '.js', encoding);
 		fileContent = fileContent.replace('require("../test/demo-test-collector.js").', '');
-		fileContent = fileContent.replace('require("../src/index.js")', 'require("qunit-reporter")');
+		fileContent = fileContent.replace('require("../src/index.js")', 'require("@slothsoft/qunit-reporter")');
 		result['<' + fileName + '>'] = fileContent;
 	});
 	return result;
