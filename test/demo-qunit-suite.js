@@ -1,4 +1,4 @@
-require('../src/qunit-hook.js');
+const QUnit = require("qunit");
 
 QUnit.module("Module A", function() {
 	QUnit.test("test10", function(assert) {

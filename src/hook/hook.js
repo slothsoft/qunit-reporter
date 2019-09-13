@@ -12,7 +12,7 @@
 class Hook {
 
 	constructor() {
-		this.testCollector = null;
+		this.run = null; 
 		this.callbacks = [];
 	}
 
@@ -20,16 +20,16 @@ class Hook {
 	 * This method is called when the tests are finished and something needs to
 	 * be done with the finished TestCollector.
 	 * 
-	 * @param testCollector
+	 * @param run
 	 */
 	
-	onFinish(testCollector) {
-		if (this.testCollector != null) 
-			throw "TestCollector was already set!";
-		if (testCollector == null) 
-			throw "TestCollector cannot be null!";
-		this.testCollector = testCollector;
-		this.callbacks.forEach(callback => callback(this.testCollector));
+	performFinish(run) {
+		if (this.run != null) 
+			throw "Run was already set!";
+		if (run == null) 
+			throw "Run cannot be null!";
+		this.run = run;
+		this.callbacks.forEach(callback => callback(this.run));
 		return this;
 	}
 	
@@ -39,8 +39,8 @@ class Hook {
 		if (typeof callback != "function") 
 			throw "Callback must be a function!";
 
-		if (this.testCollector) {
-			callback(this.testCollector);
+		if (this.run) {
+			callback(this.run);
 		}
 		this.callbacks.push(callback);
 		return this;

@@ -1,6 +1,6 @@
 var TestCollector = require('../src/test-collector.js');
 
-function createTestCollector(collector) {
+function createTestCollector() {
 	var collector = new TestCollector();
 	
 	collector.beginSuite({
@@ -36,4 +36,11 @@ function createTestCollector(collector) {
 	return collector;
 }
 
-module.exports = createTestCollector;
+function createRun() {
+	var run = createTestCollector().currentRun;
+	if (run == null) throw "Run should not be null here?!";
+	return run;
+}
+
+module.exports.createTestCollector = createTestCollector;
+module.exports.createRun = createRun;

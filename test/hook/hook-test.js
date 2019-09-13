@@ -1,159 +1,159 @@
 const Hook = require('../../src/hook/hook.js');
-const createTestCollector = require('../demo-test-collector.js');
+const createRun = require('../demo-test-collector.js').createRun;
 
 QUnit.module("hook.hook", function() {
 	QUnit.test("constructor()", function(assert) {
 		var hook = new Hook();
 		
-		assert.equal(hook.testCollector, null);
+		assert.equal(hook.run, null);
 		assert.deepEqual(hook.callbacks, []);
 	});
 	
-	QUnit.test("onFinish() then addCallback()", function(assert) {
+	QUnit.test("performFinish() then addCallback()", function(assert) {
 		var hook = new Hook();
-		var testCollector = createTestCollector();
+		var run = createRun();
 		
 		var callbackCalled = false;
-		var callbackTestCollector = null;
+		var callbackRun = null;
 		var test = "test";
 		
-		hook.onFinish(testCollector);
+		hook.performFinish(run);
 		hook.addCallback(tc => {
 			callbackCalled = true;
-			callbackTestCollector = tc;
+			callbackRun = tc;
 		});
 		
 		assert.equal(callbackCalled, true);
-		assert.deepEqual(callbackTestCollector, testCollector);
+		assert.deepEqual(callbackRun, run);
 	});
 
-	QUnit.test("addCallback() then onFinish()", function(assert) {
+	QUnit.test("addCallback() then performFinish()", function(assert) {
 		var hook = new Hook();
-		var testCollector = createTestCollector();
+		var run = createRun();
 		
 		var callbackCalled = false;
-		var callbackTestCollector = null;
+		var callbackRun = null;
 		
 		hook.addCallback(tc => {
 			callbackCalled = true;
-			callbackTestCollector = tc;
+			callbackRun = tc;
 		});
-		hook.onFinish(testCollector);
+		hook.performFinish(run);
 		
 		assert.equal(callbackCalled, true);
-		assert.deepEqual(callbackTestCollector, testCollector);
+		assert.deepEqual(callbackRun, run);
 	});
 
-	QUnit.test("onFinish() then addCallback(2)", function(assert) {
+	QUnit.test("performFinish() then addCallback(2)", function(assert) {
 		var hook = new Hook();
-		var testCollector = createTestCollector();
+		var run = createRun();
 		
-		hook.onFinish(testCollector);
+		hook.performFinish(run);
 
 		var callbackCalled1 = false;
-		var callbackTestCollector1 = null;
+		var callbackRun1 = null;
 		
 		hook.addCallback(tc => {
 			callbackCalled1 = true;
-			callbackTestCollector1 = tc;
+			callbackRun1 = tc;
 		});
 
 		var callbackCalled2 = false;
-		var callbackTestCollector2 = null;
+		var callbackRun2 = null;
 		
 		hook.addCallback(tc => {
 			callbackCalled2 = true;
-			callbackTestCollector2 = tc;
+			callbackRun2 = tc;
 		});
 		
 		assert.equal(callbackCalled1, true);
-		assert.deepEqual(callbackTestCollector1, testCollector);
+		assert.deepEqual(callbackRun1, run);
 		assert.equal(callbackCalled2, true);
-		assert.deepEqual(callbackTestCollector2, testCollector);
+		assert.deepEqual(callbackRun2, run);
 	});
 
-	QUnit.test("addCallback(2) then onFinish()", function(assert) {
+	QUnit.test("addCallback(2) then performFinish()", function(assert) {
 		var hook = new Hook();
-		var testCollector = createTestCollector();
+		var run = createRun();
 
 		var callbackCalled1 = false;
-		var callbackTestCollector1 = null;
+		var callbackRun1 = null;
 		
 		hook.addCallback(tc => {
 			callbackCalled1 = true;
-			callbackTestCollector1 = tc;
+			callbackRun1 = tc;
 		});
 
 		var callbackCalled2 = false;
-		var callbackTestCollector2 = null;
+		var callbackRun2 = null;
 		
 		hook.addCallback(tc => {
 			callbackCalled2 = true;
-			callbackTestCollector2 = tc;
+			callbackRun2 = tc;
 		});
 		
-		hook.onFinish(testCollector);
+		hook.performFinish(run);
 
 		assert.equal(callbackCalled1, true);
-		assert.deepEqual(callbackTestCollector1, testCollector);
+		assert.deepEqual(callbackRun1, run);
 		assert.equal(callbackCalled2, true);
-		assert.deepEqual(callbackTestCollector2, testCollector);
+		assert.deepEqual(callbackRun2, run);
 	});
 
-	QUnit.test("addCallback() then onFinish() then addCallback()", function(assert) {
+	QUnit.test("addCallback() then performFinish() then addCallback()", function(assert) {
 		var hook = new Hook();
-		var testCollector = createTestCollector();
+		var run = createRun();
 
 		var callbackCalled1 = false;
-		var callbackTestCollector1 = null;
+		var callbackRun1 = null;
 		
 		hook.addCallback(tc => {
 			callbackCalled1 = true;
-			callbackTestCollector1 = tc;
+			callbackRun1 = tc;
 		});
 
-		hook.onFinish(testCollector);
+		hook.performFinish(run);
 		
 		var callbackCalled2 = false;
-		var callbackTestCollector2 = null;
+		var callbackRun2 = null;
 
 		hook.addCallback(tc => {
 			callbackCalled2 = true;
-			callbackTestCollector2 = tc;
+			callbackRun2 = tc;
 		});
 
 		assert.equal(callbackCalled1, true);
-		assert.deepEqual(callbackTestCollector1, testCollector);
+		assert.deepEqual(callbackRun1, run);
 		assert.equal(callbackCalled2, true);
-		assert.deepEqual(callbackTestCollector2, testCollector);
+		assert.deepEqual(callbackRun2, run);
 	});
 
-	QUnit.test("onFinish(2)", function(assert) {
+	QUnit.test("performFinish(2)", function(assert) {
 		var hook = new Hook();
-		var testCollector = createTestCollector();
+		var run = createRun();
 		
-		hook.onFinish(testCollector);
+		hook.performFinish(run);
 
-		assert.throws(() => hook.onFinish(testCollector), "TestCollector was already set!");
+		assert.throws(() => hook.performFinish(run), "Run was already set!");
 	});
 
-	QUnit.test("onFinish() for null", function(assert) {
+	QUnit.test("performFinish() for null", function(assert) {
 		var hook = new Hook();
-		var testCollector = createTestCollector();
+		var run = createRun();
 		
-		assert.throws(() => hook.onFinish(null), "TestCollector cannot be null!");
+		assert.throws(() => hook.performFinish(null), "Run cannot be null!");
 	});
 
 	QUnit.test("addCallback() for null", function(assert) {
 		var hook = new Hook();
-		var testCollector = createTestCollector();
+		var run = createRun();
 		
 		assert.throws(() => hook.addCallback(null), "Callback cannot be null!");
 	});
 
 	QUnit.test("addCallback() for null", function(assert) {
 		var hook = new Hook();
-		var testCollector = createTestCollector();
+		var run = createRun();
 		
 		assert.throws(() => hook.addCallback(5), "Callback must be a function!");
 	});

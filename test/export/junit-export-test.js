@@ -1,10 +1,10 @@
-var JUnitExport = require('../src/junit-export.js');
+var JUnitExport = require('../../src/export/junit-export.js');
 var xmlCompare = require('dom-compare').compare;
 var DOMParser = require('xmldom').DOMParser;
 
 const xmlHeader = "<?xml version='1.0'?>";
 
-QUnit.module("junit-export", function() {
+QUnit.module("export.junit-export", function() {
 
 	// we need to make sure oure XML tests will work else all other tests are
 	// useless
@@ -115,10 +115,10 @@ QUnit.module("junit-export", function() {
 	    				"</testsuite>");
 	});
 
-	QUnit.test("exportRun()", function(assert) {
+	QUnit.test("exportRunToString()", function(assert) {
 		var junitExport = new JUnitExport();
 
-		var result = junitExport.exportRun({
+		var result = junitExport.exportRunToString({
 			name : "MyExportedRun",
 			total : 1,
 			failures : 2,
@@ -130,11 +130,17 @@ QUnit.module("junit-export", function() {
 	    		xmlHeader + "<testsuite tests='1' failures='2' name='MyExportedRun' time='456789' errors='3'></testsuite>");
 	});
 
-
-	QUnit.test("exportRun() with suite", function(assert) {
+	QUnit.test("exportRunToString() for null", function(assert) {
 		var junitExport = new JUnitExport();
 
-		var result = junitExport.exportRun({
+		assert.throws(() => hook.exportRunToString(run), "Run cannot be null!");
+	});
+
+
+	QUnit.test("exportRunToString() with suite", function(assert) {
+		var junitExport = new JUnitExport();
+
+		var result = junitExport.exportRunToString({
 			name : "MyExportedRun",
 			suites : [
 				{
@@ -157,10 +163,10 @@ QUnit.module("junit-export", function() {
 	    				"</testsuite>");
 	});
 
-	QUnit.test("exportRun() with suite and test", function(assert) {
+	QUnit.test("exportRunToString() with suite and test", function(assert) {
 		var junitExport = new JUnitExport();
 
-		var result = junitExport.exportRun({
+		var result = junitExport.exportRunToString({
 			name : "MyExportedRun",
 			suites : [
 				{

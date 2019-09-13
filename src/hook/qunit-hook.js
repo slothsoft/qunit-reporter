@@ -10,10 +10,11 @@
 // TODO: maybe the separate assertions are tests and the tests actually suites
 // (in suites)
 // FIXME: use the data that QUnit provides
+// TODO: this should be a class I guess
 
-require('qunit');
-var TestCollector = require('../test-collector.js');
-var Hook = require('./hook.js');
+const QUnit = require("qunit");
+const TestCollector = require('../test-collector.js');
+const Hook = require('./hook.js');
 
 var testCollector = new TestCollector();
 var log = false;
@@ -22,21 +23,21 @@ QUnit.begin(function(data) {
 	if (log) {
 		console.log("begin()");
 	}
-	testCollector.beginRun();
+	testCollector.beginRun({name: 'QUnit Run'});
 });
 
 QUnit.moduleStart(function(data) {
 	if (log) {
 		console.log("moduleStart(" + data.name + ")");
 	}
-	testCollector.beginSuite();
+	testCollector.beginSuite({name: data.name});
 });
 
 QUnit.testStart(function(data) {
 	if (log) {
 		console.log("testStart(" + data.name + ")");
 	}
-	testCollector.beginTest();
+	testCollector.beginTest({name: data.name});
 });
 
 QUnit.testDone(function(data) {
@@ -82,7 +83,7 @@ QUnit.done(function(data) {
 		console.log("done()");
 	}
 	testCollector.endRun();
-	hook.onFinish(testCollector);
+	hook.performFinish(testCollector.currentRun);
 });
 
 module.exports = hook;

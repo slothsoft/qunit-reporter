@@ -6,8 +6,103 @@
 - **Repository:** <https://github.com/slothsoft/qunit-reporter>
 - **Open Issues:** <https://github.com/slothsoft/qunit-reporter/issues>
 
-A module to generate reports from QUnit.
+A module to generate reports from QUnit. Right now this module supports getting test data from multiple sources. Similarly it exports into different formats.
+
+**Sources:**
+- general run object (see _[test-collector.js](src/test-collector.js)_)
+- QUnit
+- implementation of [Hook](src/hook/hook.js)
+
+**Exports:**
+- JUnit XML format
+- implementation of [Export](src/export/export.js)
+
+
+
+**Content of this file:**
+
+- [Getting Started](#getting-started)
+    - [Installing](#installing)
+    - [Using the Framework](#using-the-framework)
+    - [Examples for Sources](#examples-for-sources)
+    - [Examples for Exports](#examples-for-exports)
+- [Versions](#versions)
+- [License](#license)
+
+
+
+## Getting Started
+
+### Installing
+
+This module can be found in the npm software registry:
+
+```
+npm install @slothsoft/qunit-reporter --save
+```
+
+
+
+### Using the Framework
+
+Creating a test report consists of two parts:
+
+1. Collecting the test results 
+1. Exporting the collected results
+
+The general API to mix and match both parts is:
 
 ```js
-<export-junit-report>
+var sourceConfig = {};
+var exportConfig = {};
+
+require("@slothsoft/qunit-reporter")
+	.from<Source>(sourceConfig)
+	.to<Export>(exportConfig);
 ```
+
+
+### Examples for Sources
+
+#### QUnit
+
+- **Script File:** [JavaScript](example/source-qunit.js)
+- **Output File:** [XML](example/output/source-qunit.xml)
+
+```js
+<source-qunit>
+```
+
+
+
+### Examples for Exports
+
+All exports acknowledge the following parameters in their configuration:
+
+- **`file`** - exports directly to file
+- **`callback`** - callback function with report content
+
+
+#### JUnit
+
+- **Script File:** [JavaScript](example/export-junit.js)
+- **Output File:** [XML](example/output/export-junit.xml)
+
+```js
+<export-junit>
+```
+
+
+##  Versions
+
+
+| Version       | Info    |
+| ------------- | ------- |
+| [1.0.0](https://github.com/slothsoft/qunit-reporter/milestone/2?closed=1) | <ul><li>stable functionality</li><li>JUnit XML report</li><li>HTML report (with customizable XSL)</li></ul> |
+| [0.1.0](https://github.com/slothsoft/qunit-reporter/milestone/1?closed=1) | <ul><li>basic functionality</li><li>JUnit XML report</li></ul> |
+   
+
+
+## License
+
+This project is licensed under the MIT License - see the [MIT license](LICENSE) for details.

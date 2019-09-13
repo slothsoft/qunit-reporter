@@ -9,12 +9,15 @@
 
 // TODO: some of the exported fields might be null / undefined
 // TODO: "skipped" is obviously supported
+// TODO: is there a way to make everything but exportRunToString() private?
 
 var XMLWriter = require('xml-writer');
+var Export = require('./export.js');
  
-class JUnitExport {
+class JUnitExport extends Export {
 
 	constructor() {
+		super("JUnit");
 		this.xmlWriter = new XMLWriter();
 	}
 
@@ -28,7 +31,8 @@ class JUnitExport {
 	 * @see JUnitExport#exportSuite for the inner test suite XML
 	 */
 	
-	exportRun(run) {    
+	exportRunToString(run) {    
+		if (run == null) throw "Run cannot be null!";
 		this.xmlWriter.startDocument();
 		this.startTestSuiteElement(run);
 		if (run.suites != null) {
