@@ -7,7 +7,8 @@ const fs = require('fs');
 const encoding = 'utf8';
 
 var replacements = createReplacements([
-	'export-html', 'export-junit', 'export-log', 'source-qunit'
+	'export-custom', 'export-html', 'export-junit', 'export-log', 'source-qunit',
+	'source-run'
 ]);
 copyReplace('script/base-readme.md', 'README.md', replacements);
 

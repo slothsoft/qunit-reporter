@@ -54,6 +54,13 @@ class ToExport {
 		return this.toExport(new (require("./export/log-export.js"))(), config);
 	}
 
+	toCustomExport(exportRunToString, config) {
+		const Export = require("./export/export.js");
+		var myExport = new Export("custom");
+		myExport.exportRunToString = exportRunToString;
+		return this.toExport(myExport, config);
+	}
+
 	toExport(myExport, config) {
 		this.hook.addCallback(run => myExport.exportRun(run, config));
 		return this;

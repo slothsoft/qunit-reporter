@@ -5,6 +5,7 @@
 - **Author:** [Stef Schulz](mailto:s.schulz@slothsoft.de)
 - **Repository:** <https://github.com/slothsoft/qunit-reporter>
 - **Open Issues:** <https://github.com/slothsoft/qunit-reporter/issues>
+- **Example:** <https://slothsoft.github.io/qunit-reporter/>
 
 A module to generate reports from QUnit. Right now this module supports getting test data from multiple sources. Similarly it exports into different formats.
 
@@ -87,6 +88,35 @@ require("qunit-reporter").fromQUnit().toLog({ file : "example/output/source-quni
 ```
 
 
+### Custom Source
+
+- **Script File:** [JavaScript](example/source-run.js)
+- **Output File:** [TXT](example/output/source-run.xml)
+
+```js
+var run = {
+	name : "Run",
+	suites : [
+		{
+			name : "source-run",
+			tests : [
+				{ name : "Test 1", time : 123},
+				{ name : "Test 2", time : 456, error : "Error"},
+				{ name : "Test 3", time : 789, failure : "Failure"},
+			],
+		}
+	],
+	total : 3,
+	failures : 1,
+	errors : 1,
+	tile : 1368
+};
+
+require("qunit-reporter").fromRun(run).toJUnit({ file : "example/output/source-run.xml" });
+
+```
+
+
 
 ## Examples for Exports
 
@@ -148,13 +178,32 @@ require("qunit-reporter").fromRun(run).toLog({
 ```
 
 
+### Custom Export
+
+Uses a function to export the run.
+
+- **Script File:** [JavaScript](example/export-custom.js)
+- **Output File:** [TXT](example/output/export-custom.txt)
+
+```js
+var run = createRun();
+
+require("qunit-reporter").fromRun(run).toCustomExport(function(run) {
+	// this is a minimalistic report
+	return (run.total - run.failures - run.errors) + " / " + run.total + " passed.";
+}, {
+	file : "example/output/export-custom.txt", // exports directly to file
+	callback : reportContent => {}, // callback function with report content
+});
+```
+
+
 ##  Versions
 
 
 | Version       | Info    |
 | ------------- | ------- |
-| [1.0.0](https://github.com/slothsoft/qunit-reporter/milestone/2?closed=1) | <ul><li>stable functionality</li><li>JUnit XML report</li><li>HTML report (with customizable XSL)</li></ul> |
-| [0.1.0](https://github.com/slothsoft/qunit-reporter/milestone/1?closed=1) | <ul><li>basic functionality</li><li>JUnit XML report</li></ul> |
+| [0.1.0](https://github.com/slothsoft/qunit-reporter/milestone/1?closed=1) | <ul><li>basic functionality</li><li>sources: QUnit</li><li>exports: JUnit, HTML</li></ul> |
    
 
 

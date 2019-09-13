@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<testsuites name="Run" tests="3" failures="1" errors="1"><testsuite name="source-run"><testcase name="Test 1" time="123"/><testcase name="Test 2" time="456"><error message="Error">Error</error></testcase><testcase name="Test 3" time="789"><failure message="Failure">Failure</failure></testcase></testsuite></testsuites>
