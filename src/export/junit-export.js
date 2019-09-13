@@ -1,6 +1,6 @@
 
 /**
- * This class exports data collected by a TestCollector into JUnit XML format.
+ * This class exports a run into JUnit XML format.
  * 
  * @since 1.0.0
  * @author Stef Schulz <s.schulz@slothsoft.de>
@@ -34,7 +34,7 @@ class JUnitExport extends Export {
 	exportRunToString(run) {    
 		if (run == null) throw "Run cannot be null!";
 		this.xmlWriter.startDocument();
-		this.startTestSuiteElement(run);
+		this.startTestSuiteElement(run, 'testsuites');
 		if (run.suites != null) {
 			run.suites.forEach(suite => this.exportSuite(suite));
 		}
@@ -55,15 +55,15 @@ class JUnitExport extends Export {
 	 */
 	
 	exportSuite(suite) {    
-		this.startTestSuiteElement(suite);
+		this.startTestSuiteElement(suite, 'testsuite');
 		if (suite.tests != null) {
 			suite.tests.forEach(test => this.exportTest(test));
 		}
 		this.xmlWriter.endElement();
 	}
 
-	startTestSuiteElement(suite) { 
-		this.xmlWriter.startElement('testsuite');
+	startTestSuiteElement(suite, elementName) { 
+		this.xmlWriter.startElement(elementName);
 		this.xmlWriter.writeAttribute('name', suite.name);
 		this.xmlWriter.writeAttribute('time', suite.time);
 		this.xmlWriter.writeAttribute('tests', suite.total);

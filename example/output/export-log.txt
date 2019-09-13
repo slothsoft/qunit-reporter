@@ -1,0 +1,12 @@
+ok 1 Module A > test10
+ok 2 Module A > test11
+ok 3 Module B > test20
+not ok 4 Module E > test50
+  message: "An exception was thrown!"
+not ok 5 Module F > test60
+  message: "expected: 5, actual: 'six'"
+1..5
+# pass 0
+# skip 0
+# todo 0
+# fail 0

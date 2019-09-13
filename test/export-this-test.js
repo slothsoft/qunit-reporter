@@ -1,3 +1,5 @@
-require("../src/index.js").fromQUnit().toJUnit({
-	file : "example/output/qunit-reporter-tests.xml"
+require("../src/index.js").fromQUnit().toHtml({
+	file : "docs/index.html"
 });
+
+// require("./demo-qunit-suite");

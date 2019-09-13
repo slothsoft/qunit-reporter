@@ -6,6 +6,4 @@ QUnit.module("source-qunit", function() {
 	});
 });
 
-require("../src/index.js").fromQUnit().toJUnit({
-	file : "example/output/source-qunit.xml"
-});
+require("../src/index.js").fromQUnit().toLog({ file : "example/output/source-qunit.txt" });

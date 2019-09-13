@@ -61,13 +61,24 @@ require("@slothsoft/qunit-reporter")
 	.to<Export>(exportConfig);
 ```
 
+You can generally chain multiple exports after each other like this:
+
+```js
+require("@slothsoft/qunit-reporter")
+	.from<Source>(sourceConfig)
+	.to<Export1>(exportConfig)
+	.to<Export2>(exportConfig)
+	.to<Export3>(exportConfig);
+```
+
+
 
 ### Examples for Sources
 
 #### QUnit
 
 - **Script File:** [JavaScript](example/source-qunit.js)
-- **Output File:** [XML](example/output/source-qunit.xml)
+- **Output File:** [TXT](example/output/source-qunit.txt)
 
 ```js
 <source-qunit>
@@ -83,13 +94,39 @@ All exports acknowledge the following parameters in their configuration:
 - **`callback`** - callback function with report content
 
 
+#### HTML
+
+Creates an HTML that can be displayed in any browser.
+
+- **Script File:** [JavaScript](example/export-html.js)
+- **Output File:** [HTML](example/output/export-html.html)
+
+```js
+<export-html>
+```
+
+
 #### JUnit
+
+Creates standard JUnit XML that should be readable by every program that can handle JUnit as well.
 
 - **Script File:** [JavaScript](example/export-junit.js)
 - **Output File:** [XML](example/output/export-junit.xml)
 
 ```js
 <export-junit>
+```
+
+
+#### Log
+
+Creates a log similar to what NodeJS does when executing the tests.
+
+- **Script File:** [JavaScript](example/export-log.js)
+- **Output File:** [TXT](example/output/export-log.txt)
+
+```js
+<export-log>
 ```
 
 

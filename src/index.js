@@ -42,8 +42,16 @@ class ToExport {
 		this.hook = hook;
 	}
 	
+	toHtml(config) {
+		return this.toExport(new (require("./export/html-export.js"))(), config);
+	}
+	
 	toJUnit(config) {
 		return this.toExport(new (require("./export/junit-export.js"))(), config);
+	}
+
+	toLog(config) {
+		return this.toExport(new (require("./export/log-export.js"))(), config);
 	}
 
 	toExport(myExport, config) {

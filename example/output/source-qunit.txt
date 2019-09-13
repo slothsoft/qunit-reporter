@@ -1,0 +1,6 @@
+ok 1 source-qunit > my first test
+1..1
+# pass 1
+# skip 0
+# todo 0
+# fail 0

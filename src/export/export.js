@@ -20,7 +20,7 @@ class Export {
 	exportRun(run, config) {    		
 		if (config == null) return;
 	
-		var runAsString = this.exportRunToString(run);
+		var runAsString = this.exportRunToString(run, config);
 		
 		if (config.file) {
 			this.exportRunToFile(runAsString, config.file);
