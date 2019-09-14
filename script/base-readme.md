@@ -113,6 +113,12 @@ Creates an HTML that can be displayed in any browser.
 <export-html>
 ```
 
+To see how the config for XSL might work see this example:
+
+- **Script File:** [JavaScript](example/export-html-custom.js)
+- **Output File:** [TXT](example/output/export-html-custom.txt)
+- **Tests:** [JavaScript](test/export/html-export-test.js)
+
 
 ### JUnit
 

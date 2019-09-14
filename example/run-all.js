@@ -12,6 +12,7 @@ for (const file of fs.readdirSync(directory)) {
 // run all examples
 
 require("./export-custom.js");
+require("./export-html-custom.js");
 require("./export-html.js");
 require("./export-junit.js");
 require("./export-log.js");

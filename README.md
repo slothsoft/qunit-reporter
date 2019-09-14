@@ -143,8 +143,16 @@ var run = createRun();
 require("@slothsoft/qunit-reporter").fromRun(run).toHtml({
 	file : "example/output/export-html.html", // exports directly to file
 	callback : reportContent => {}, // callback function with report content
+	xsl : null, // XSL that converts to HTML (or whatever you like)
+	xslFile : null, // path to XSL file that converts to HTML
 });
 ```
+
+To see how the config for XSL might work see this example:
+
+- **Script File:** [JavaScript](example/export-html-custom.js)
+- **Output File:** [TXT](example/output/export-html-custom.txt)
+- **Tests:** [JavaScript](test/export/html-export-test.js)
 
 
 ### JUnit

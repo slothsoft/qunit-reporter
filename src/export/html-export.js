@@ -28,13 +28,20 @@ class HtmlExport extends Export {
 
 	exportRunToString(run, config={}) {    
 		if (run == null) throw "Run cannot be null!";
+
+		var xsl = config.xsl;
+
+		if (xsl == null && config.xslFile != null) {
+			xsl = fs.readFileSync(config.xslFile, encoding);
+		}
+		if (xsl == null) {
+			xsl = fs.readFileSync(path.resolve(__dirname, './html-export.xsl'), encoding);
+		}
 		
 		var junitExport = this.junitExport.exportRunToString(run);
-		var xsd = fs.readFileSync(path.resolve(__dirname, './html-export.xsl'), encoding);
-
 		return xsltProcessor.xsltProcess(
 						xsltProcessor.xmlParse(junitExport),
-						xsltProcessor.xmlParse(xsd));
+						xsltProcessor.xmlParse(xsl));
 	}
 
 	exportSuite(suite) {    
