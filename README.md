@@ -5,7 +5,7 @@
 - **Author:** [Stef Schulz](mailto:s.schulz@slothsoft.de)
 - **Repository:** <https://github.com/slothsoft/qunit-reporter>
 - **Open Issues:** <https://github.com/slothsoft/qunit-reporter/issues>
-- **NPM:** `[@slothsoft/qunit-reporter](https://www.npmjs.com/package/@slothsoft/qunit-reporter)`
+- **NPM:** [`@slothsoft/qunit-reporter`](https://www.npmjs.com/package/@slothsoft/qunit-reporter)
 - **Example:** <https://slothsoft.github.io/qunit-reporter/>
 
 A module to generate reports from QUnit. Right now this module supports getting test data from multiple sources. Similarly it exports into different formats.
