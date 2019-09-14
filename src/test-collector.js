@@ -1,3 +1,4 @@
+"use strict";
 
 /**
 * This class collects data of tests that got run. It is not dependent on QUnit

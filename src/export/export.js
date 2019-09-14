@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * This class has the basic export functions like exporting to string and file.

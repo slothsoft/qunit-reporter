@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * This class exports a run into JUnit XML format.

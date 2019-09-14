@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * This class exports a run into a log similar to what gets printed on the console when tests are run.

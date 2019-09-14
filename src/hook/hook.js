@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * This class brings together the hook implementation with the exports. It is

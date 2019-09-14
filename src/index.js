@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * This file is the entire API for the module. So it will hook all the
  * independent modules together. It should be the only file that knows every

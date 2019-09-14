@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * This file hooks the TestCollector to QUnit. It should return a Hook of some
  * kind.
