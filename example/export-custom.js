@@ -6,4 +6,5 @@ require("../src/index.js").fromRun(run).toCustomExport(function(run) {
 }, {
 	file : "example/output/export-custom.txt", // exports directly to file
 	callback : reportContent => {}, // callback function with report content
+	encoding : 'utf-8', // the encoding of the exported file
 });

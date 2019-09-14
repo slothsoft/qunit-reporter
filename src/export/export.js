@@ -14,34 +14,43 @@
 
 class Export {
 
-	constructor(displayName) {
+	constructor(displayName, defaultConfig) {
 		this.displayName = displayName;
+		this.defaultConfig = {...{
+			encoding : 'utf-8',
+		}, ...defaultConfig};
 	}
 
-	exportRun(run, config) {    		
-		if (config == null) return;
+	exportRun(run, inputConfig) {    		
+		if (inputConfig == null) return;
 	
+		var config = this.validateConfig(inputConfig);
+		
 		var runAsString = this.exportRunToString(run, config);
 		
 		if (config.file) {
-			this.exportRunToFile(runAsString, config.file);
+			this.exportRunToFile(runAsString, config);
 		}
 		if (config.callback) {
 			config.callback(runAsString);
 		}
 	}
 	
-	exportRunToFile(runAsString, file) {   
+	validateConfig(config) {
+		return  {...this.defaultConfig, ...config};
+	}
+	
+	exportRunToFile(runAsString, config) {   
 		const fs = require('fs');
 		const path = require('path');
 		
-		var parentDir = path.dirname(file);
+		var parentDir = path.dirname(config.file);
 		if (!fs.existsSync(parentDir)) {
 			fs.mkdirSync(parentDir);
 		}
 		
-		fs.writeFileSync(file, runAsString, 'utf-8');
-		console.log("Wrote " + this.displayName + " report to file: " + file);
+		fs.writeFileSync(config.file, runAsString, config.encoding);
+		console.log("Wrote " + this.displayName + " report to file: " + config.file);
 	}
 
 	/**

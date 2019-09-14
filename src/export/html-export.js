@@ -8,16 +8,12 @@
  * @url https://github.com/slothsoft/qunit-reporter
  */
 
-// TODO: maybe all exports should know "encoding"
-// TODO: maybe all exports should know how to fill default values in a config file
-
 const Export = require('./export.js');
 const JUnitExport = require('./junit-export.js');
 
 const fs = require('fs');
 const path = require('path');
 const xsltProcessor = require('xslt-processor');
-const encoding = 'utf-8';
  
 class HtmlExport extends Export {
 
@@ -26,17 +22,21 @@ class HtmlExport extends Export {
 		this.junitExport = new JUnitExport();
 	}
 
-	exportRunToString(run, config={}) {    
+	exportRunToString(run, inputConfig={}) {    
 		if (run == null) throw "Run cannot be null!";
 
+		var config = this.validateConfig(inputConfig);
 		var xsl = config.xsl;
 
 		if (xsl == null && config.xslFile != null) {
-			xsl = fs.readFileSync(config.xslFile, encoding);
+			xsl = fs.readFileSync(config.xslFile, config.encoding);
 		}
 		if (xsl == null) {
-			xsl = fs.readFileSync(path.resolve(__dirname, './html-export.xsl'), encoding);
+			xsl = fs.readFileSync(path.resolve(__dirname, './html-export.xsl'), config.encoding);
 		}
+		if (xsl == null) throw "XSL cannot be null!";
+
+		xsl = xsl.replace("${encoding}", config.encoding);
 		
 		var junitExport = this.junitExport.exportRunToString(run);
 		return xsltProcessor.xsltProcess(

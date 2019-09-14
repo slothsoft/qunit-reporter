@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:template match="/">
@@ -7,7 +7,7 @@
 				<title>Test Report</title>
 				<link rel="stylesheet" type="text/css"
 					href="https://slothsoft.github.io/qunit-reporter/style.css" />
-				<meta charset="utf-8" />
+				<meta charset="${encoding}" />
 			</head>
 			<body>
 			<div id="content">

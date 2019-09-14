@@ -143,6 +143,7 @@ var run = createRun();
 require("@slothsoft/qunit-reporter").fromRun(run).toHtml({
 	file : "example/output/export-html.html", // exports directly to file
 	callback : reportContent => {}, // callback function with report content
+	encoding : 'utf-8', // the encoding of the exported file
 	xsl : null, // XSL that converts to HTML (or whatever you like)
 	xslFile : null, // path to XSL file that converts to HTML
 });
@@ -168,6 +169,7 @@ var run = createRun();
 require("@slothsoft/qunit-reporter").fromRun(run).toJUnit({
 	file : "example/output/export-junit.xml", // exports directly to file
 	callback : reportContent => {}, // callback function with report content
+	encoding : 'utf-8', // the encoding of the exported file
 });
 ```
 
@@ -185,6 +187,7 @@ var run = createRun();
 require("@slothsoft/qunit-reporter").fromRun(run).toLog({
 	file : "example/output/export-log.txt", // exports directly to file
 	callback : reportContent => {}, // callback function with report content
+	encoding : 'utf-8', // the encoding of the exported file
 });
 ```
 
@@ -205,6 +208,7 @@ require("@slothsoft/qunit-reporter").fromRun(run).toCustomExport(function(run) {
 }, {
 	file : "example/output/export-custom.txt", // exports directly to file
 	callback : reportContent => {}, // callback function with report content
+	encoding : 'utf-8', // the encoding of the exported file
 });
 ```
 
