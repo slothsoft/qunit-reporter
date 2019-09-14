@@ -14,6 +14,7 @@ const Export = require('./export.js');
 const JUnitExport = require('./junit-export.js');
 
 const fs = require('fs');
+const path = require('path');
 const xsltProcessor = require('xslt-processor');
 const encoding = 'utf-8';
  
@@ -28,7 +29,7 @@ class HtmlExport extends Export {
 		if (run == null) throw "Run cannot be null!";
 		
 		var junitExport = this.junitExport.exportRunToString(run);
-		var xsd = fs.readFileSync('./src/export/html-export.xsl', encoding);
+		var xsd = fs.readFileSync(path.resolve(__dirname, './html-export.xsl'), encoding);
 
 		return xsltProcessor.xsltProcess(
 						xsltProcessor.xmlParse(junitExport),
