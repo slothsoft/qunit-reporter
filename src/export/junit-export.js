@@ -8,7 +8,6 @@
  * @url https://github.com/slothsoft/qunit-reporter
  */
 
-// TODO: some of the exported fields might be null / undefined
 // TODO: "skipped" is obviously supported
 // TODO: is there a way to make everything but exportRunToString() private?
 
@@ -32,8 +31,10 @@ class JUnitExport extends Export {
 	 * @see JUnitExport#exportSuite for the inner test suite XML
 	 */
 	
-	exportRunToString(run) {    
-		if (run == null) throw "Run cannot be null!";
+	exportRunToString(inputRun) {    
+		if (inputRun == null) throw "Run cannot be null!";
+
+		var run = this.validateRun(inputRun);
 		this.xmlWriter.startDocument();
 		this.startTestSuiteElement(run, 'testsuites');
 		if (run.suites != null) {
@@ -55,7 +56,9 @@ class JUnitExport extends Export {
 	 * @see JUnitExport#exportTest for the test case XML
 	 */
 	
-	exportSuite(suite) {    
+	exportSuite(inputSuite) {    
+		var suite = this.validateSuite(inputSuite);
+		
 		this.startTestSuiteElement(suite, 'testsuite');
 		if (suite.tests != null) {
 			suite.tests.forEach(test => this.exportTest(test));
@@ -82,7 +85,9 @@ class JUnitExport extends Export {
 	 * @see TestCollector#beginTest for supported properties
 	 */
 		
-	exportTest(test) {    
+	exportTest(inputTest) {    
+		var test = this.validateTest(inputTest);
+		
 		this.xmlWriter.startElement('testcase');
 		this.xmlWriter.writeAttribute('name', test.name);
 		this.xmlWriter.writeAttribute('time', test.time);

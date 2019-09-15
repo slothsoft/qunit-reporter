@@ -42,6 +42,44 @@ QUnit.module("export.html-export", function() {
 
 	    assert.equal(result, "test10|test11|test20|test50|test60|");
 	});
+
+	QUnit.test("exportRunToString() fields null", function(assert) {
+		var htmlExport = new HtmlExport();
+
+		var result = htmlExport.exportRunToString({
+			suites : [
+				{
+					tests : [
+						{},
+					],
+				}
+			],
+		});
+
+	    assert.notEqual(result, null);
+	});
+
+	QUnit.test("exportRunToString() fields null 2", function(assert) {
+		var htmlExport = new HtmlExport();
+
+		var result = htmlExport.exportRunToString({
+			suites : [
+				{
+				}
+			],
+		});
+
+	    assert.notEqual(result, null);
+	});
+
+	QUnit.test("exportRunToString() fields null 3", function(assert) {
+		var htmlExport = new HtmlExport();
+
+		var result = htmlExport.exportRunToString({
+		});
+
+	    assert.notEqual(result, null);
+	});
 	
 	QUnit.test("exportRunToString() for null", function(assert) {
 		var htmlExport = new HtmlExport();

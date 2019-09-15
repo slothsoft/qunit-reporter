@@ -44,6 +44,60 @@ QUnit.module("export.log-export", function() {
 				"# fail 3\n");
 	});
 
+	QUnit.test("exportRunToString() fields null", function(assert) {
+		var logExport = new LogExport();
+
+		var result = logExport.exportRunToString({
+			suites : [
+				{
+					tests : [
+						{},
+					],
+				}
+			],
+		});
+
+	    assert.equal(result,
+	    		"ok 1 undefined > undefined\n" + 
+	    		"1..1\n" + 
+	    		"# pass 0\n" + 
+				"# skip 0\n" + 
+				"# todo 0\n" + 
+				"# fail 0\n");
+	});
+
+	QUnit.test("exportRunToString() fields null 2", function(assert) {
+		var logExport = new LogExport();
+
+		var result = logExport.exportRunToString({
+			suites : [
+				{
+				}
+			],
+		});
+
+	    assert.equal(result,
+	    		"0..0\n" + 
+	    		"# pass 0\n" + 
+				"# skip 0\n" + 
+				"# todo 0\n" + 
+				"# fail 0\n");
+	});
+
+	QUnit.test("exportRunToString() fields null 3", function(assert) {
+		var logExport = new LogExport();
+
+		var result = logExport.exportRunToString({
+		});
+
+	    assert.equal(result,
+	    		"0..0\n" + 
+	    		"# pass 0\n" + 
+				"# skip 0\n" + 
+				"# todo 0\n" + 
+				"# fail 0\n");
+	});
+
 	QUnit.test("exportRunToString() for null", function(assert) {
 		var logExport = new LogExport();
 

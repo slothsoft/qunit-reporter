@@ -40,6 +40,33 @@ class Export {
 		return  {...this.defaultConfig, ...config};
 	}
 	
+	validateRun(run) {
+		return {...{
+			name : 'undefined',
+			total : 0,
+			failures : 0,
+			errors : 0,
+			time : 0,
+		}, ...run};
+	}
+	
+	validateSuite(suite) {
+		return {...{
+			name : 'undefined',
+			total : 0,
+			failures : 0,
+			errors : 0,
+			time : 0,
+		}, ...suite};
+	}
+
+	validateTest(test) {
+		return {...{
+			name : 'undefined',
+			time : 0,
+		}, ...test};
+	}
+	
 	exportRunToFile(runAsString, config) {   
 		const fs = require('fs');
 		const path = require('path');

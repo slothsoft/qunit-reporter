@@ -43,18 +43,6 @@ class HtmlExport extends Export {
 						xsltProcessor.xmlParse(junitExport),
 						xsltProcessor.xmlParse(xsl));
 	}
-
-	exportSuite(suite) {    
-		if (suite.tests != null) {
-			suite.tests.forEach(test => this.exportTest(suite.name, test));
-		}
-	}
-		
-	exportTest(suiteName, test) {  
-		this.result += "ok " + this.index + " " + suiteName + " > " + test.name +"\n";
-		
-		this.index++;
-	}
 }
 
 module.exports = HtmlExport;

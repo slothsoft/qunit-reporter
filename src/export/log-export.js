@@ -18,16 +18,18 @@ class LogExport extends Export {
 		super("log");
 	}
 
-	exportRunToString(run) {    
-		if (run == null) throw "Run cannot be null!";
+	exportRunToString(inputRun) {    
+		if (inputRun == null) throw "Run cannot be null!";
+
+		var run = this.validateRun(inputRun);
 		
 		this.result = "";
-		this.index = 1;
+		this.index = 0;
 		
-		if (run.suites != null) {
+		if (run.suites) {
 			run.suites.forEach(suite => this.exportSuite(suite));
 		}
-		this.result += "1.." + (this.index - 1) + "\n";
+		this.result += Math.min(1, this.index) + ".." + (this.index) + "\n";
 		this.result += "# pass " + (run.total - run.failures - run.errors) + "\n";
 		this.result += "# skip 0\n";
 		this.result += "# todo 0\n";
@@ -46,7 +48,7 @@ class LogExport extends Export {
 		if (test.error || test.failure) {
 			this.result += "not ";
 		}
-		this.result += "ok " + this.index + " " + suiteName + " > " + test.name +"\n";
+		this.result += "ok " + (this.index + 1) + " " + suiteName + " > " + test.name +"\n";
 
 		if (test.error || test.failure) {
 			this.result += "  message: \"" + (test.error || test.failure) + "\"\n";

@@ -130,6 +130,55 @@ QUnit.module("export.junit-export", function() {
 	    		xmlHeader + "<testsuites tests='1' failures='2' name='MyExportedRun' time='456789' errors='3'></testsuites>");
 	});
 
+	QUnit.test("exportRunToString() fields null", function(assert) {
+		var junitExport = new JUnitExport();
+
+		var result = junitExport.exportRunToString({
+			suites : [
+				{
+					tests : [
+						{},
+					],
+				}
+			],
+		});
+
+	    assertXmlEqual(assert, result,
+	    		xmlHeader + "<testsuites tests='0' failures='0' name='undefined' time='0' errors='0'>" +
+	    				"<testsuite tests='0' failures='0' name='undefined' time='0' errors='0'>" +
+	    				"<testcase name='undefined' time='0'></testcase>" +
+	    				"</testsuite>" +
+	    				"</testsuites>");
+	});
+
+	QUnit.test("exportRunToString() fields null 2", function(assert) {
+		var junitExport = new JUnitExport();
+
+		var result = junitExport.exportRunToString({
+			suites : [
+				{
+				}
+			],
+		});
+
+	    assertXmlEqual(assert, result,
+	    		xmlHeader + "<testsuites tests='0' failures='0' name='undefined' time='0' errors='0'>" +
+	    				"<testsuite tests='0' failures='0' name='undefined' time='0' errors='0'>" +
+	    				"</testsuite>" +
+	    				"</testsuites>");
+	});
+
+	QUnit.test("exportRunToString() fields null 3", function(assert) {
+		var junitExport = new JUnitExport();
+
+		var result = junitExport.exportRunToString({
+		});
+		
+	    assertXmlEqual(assert, result,
+	    		xmlHeader + "<testsuites tests='0' failures='0' name='undefined' time='0' errors='0'>" +
+	    				"</testsuites>");
+	});
+	
 	QUnit.test("exportRunToString() for null", function(assert) {
 		var junitExport = new JUnitExport();
 
@@ -156,7 +205,7 @@ QUnit.module("export.junit-export", function() {
 			errors : 3,
 			time : 456789
 		});
-
+		
 	    assertXmlEqual(assert, result,
 	    		xmlHeader + "<testsuites tests='1' failures='2' name='MyExportedRun' time='456789' errors='3'>" +
 	    				"<testsuite tests='4' failures='5' name='MyExportedSuite' time='7' errors='6'></testsuite>" +
