@@ -159,8 +159,9 @@ Uses a function to export the run.
 ##  Versions
 
 
-| Version       | Info    |
-| ------------- | ------- |
+| Version       | Release Notes    |
+| ------------- | ---------------- |
+| [0.2.0](https://github.com/slothsoft/qunit-reporter/milestone/3?closed=1) | <ul><li>XSL for HTML works correctly now and is customizable</li><li>bugfixes</li><li>defensive programming</li></ul> |
 | [0.1.0](https://github.com/slothsoft/qunit-reporter/milestone/1?closed=1) | <ul><li>basic functionality</li><li>sources: QUnit</li><li>exports: JUnit, HTML</li></ul> |
    
 
