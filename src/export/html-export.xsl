@@ -20,11 +20,11 @@
 								<xsl:value-of select="@tests" />
 							</li>
 							<li>
-								<span class="error">✘</span><b>Errors: </b>
+								<span class="error">✘</span><b>Errors: </b>
 								<xsl:value-of select="@errors" />
 							</li>
 							<li>
-								<span class="failure">✘</span><b>Failures: </b>
+								<span class="failure">✘</span><b>Failures: </b>
 								<xsl:value-of select="@failures" />
 							</li>
 						</ul>
@@ -48,13 +48,13 @@
 								<li>
 									<xsl:choose>
 										<xsl:when test="failure">
-											<span class="failure">✘</span>
+											<span class="failure">✘</span>
 										</xsl:when>
 										<xsl:when test="error">
-											<span class="error">✘</span>
+											<span class="error">✘</span>
 										</xsl:when>
 										<xsl:otherwise>
-											<span class="success">✔</span>
+											<span class="success">✔</span>
 										</xsl:otherwise>
 									</xsl:choose>
 								
