@@ -29,7 +29,9 @@ QUnit.module("export.html-export", function() {
 					</xsl:for-each>`
 		});
 
-	    assert.equal(result, "test10|test11|test20|test50|test60|");
+
+	    assert.equal(result, "<!DOCTYPE html>\n" +
+	    		"test10|test11|test20|test50|test60|");
 	});
 
 	QUnit.test("exportRunToString() with XSL file", function(assert) {
@@ -40,7 +42,8 @@ QUnit.module("export.html-export", function() {
 			xslFile :  "./test/export/short-report.xsl"
 		});
 
-	    assert.equal(result, "test10|test11|test20|test50|test60|");
+	    assert.equal(result, "<!DOCTYPE html>\n" +
+	    		"test10|test11|test20|test50|test60|");
 	});
 
 	QUnit.test("exportRunToString() fields null", function(assert) {

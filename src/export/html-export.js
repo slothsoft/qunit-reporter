@@ -39,9 +39,11 @@ class HtmlExport extends Export {
 		xsl = xsl.replace("${encoding}", config.encoding);
 		
 		var junitExport = this.junitExport.exportRunToString(run);
-		return xsltProcessor.xsltProcess(
+		var html = xsltProcessor.xsltProcess(
 						xsltProcessor.xmlParse(junitExport),
 						xsltProcessor.xmlParse(xsl));
+		var prefix = "<!DOCTYPE html>\n";
+		return prefix + html;
 	}
 }
 
