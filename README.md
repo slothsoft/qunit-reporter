@@ -8,7 +8,7 @@
 - **NPM:** [`@slothsoft/qunit-reporter`](https://www.npmjs.com/package/@slothsoft/qunit-reporter)
 - **Example:** <https://slothsoft.github.io/qunit-reporter/>
 
-A module to generate reports from QUnit. Right now this module supports getting test data from multiple sources. Similarly it exports into different formats.
+A module to generate reports from QUnit. Right now this module supports getting test data from multiple sources. Similarly it exports into different formats. This report generator knows how to export into a simple log file, JUnit XML and HTML.
 
 **Content of this file:**
 
