@@ -5,6 +5,11 @@
  * called from the hook implementation (or is even extended by it) and delegates
  * to callbacks that should call the exports.
  * 
+ * You need to override the following methods:
+ * <ul>
+ * <li>dispose()</li>
+ * </ul>
+ * 
  * @since 1.0.0
  * @author Stef Schulz <s.schulz@slothsoft.de>
  * @url https://github.com/slothsoft/qunit-reporter
@@ -45,6 +50,10 @@ class Hook {
 		}
 		this.callbacks.push(callback);
 		return this;
+	}
+
+	dispose() {    
+		// nothing to do on default
 	}
 }
 

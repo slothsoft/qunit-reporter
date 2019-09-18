@@ -17,7 +17,8 @@
 class FromHook {
 	
 	fromQUnit() {
-		return this.fromHook(require("./hook/qunit-hook.js"));
+		var QUnitHook = require("./hook/qunit-hook.js");
+		return this.fromHook(new QUnitHook());
 	}
 	
 	fromHook(hook) {

@@ -2,6 +2,7 @@
 
 /**
  * This class has the basic export functions like exporting to string and file.
+ * 
  * You need to override the following methods:
  * <ul>
  * <li>exportRunToString()</li>
